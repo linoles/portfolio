@@ -9,9 +9,9 @@ export default function Navbar({ curPage }: { curPage: string }) {
   const router = useRouter();
 
   return (
-    <aside className="w-1/5 flex flex-col gap-12 p-8 bg-(--main-bg) border-r-2 border-(--border)">
+    <aside className="w-1/5 flex flex-col gap-12 p-8 bg-(--main-bg) border-r-2 border-(--border) h-screen">
       <div className="flex gap-4 items-center">
-        <p className={`rounded-lg bg-[#0B0F1F] p-1 text-center w-10 h-10 text-(--btn-active) text-2xl ${headingsFont.className}`}>P</p>
+        <p className={`rounded-lg bg-[#191C43] p-1 text-center w-10 h-10 text-(--text-bright) text-2xl ${headingsFont.className}`}>P</p>
         <h2 className={`${mainFont.className} text-(--text-main) font-semibold text-xl`}>Portfolio</h2>
       </div>
       <nav className={`flex flex-col gap-5 ${mainFont.className}`}>

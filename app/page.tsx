@@ -2,24 +2,40 @@
 
 import { boldFont, headingsFont, mainFont } from "./lib/fonts";
 import { useRouter } from "next/navigation";
-import { BrainCircuit, MoveRight } from "lucide-react";
+import { BrainCircuit, Code, Focus, MoveRight } from "lucide-react";
 import '@/app/globals.css';
-import { get_repository, get_repository_content } from "./lib/functions/getGithubInfo";
-import { useEffect } from "react";
+import { get_repository_content } from "./lib/functions/getGithubInfo";
+import { useEffect, useState } from "react";
+import TechSkill from "./lib/components/TechSkill";
 
 export default function HomePage() {
   const router = useRouter();
-  /*useEffect(() => {
-    get_repository("algorithms").then((response) => console.log("Repository:", response));
-    get_repository_content("algorithms", "tasks/codeforces/1100/1490C.cpp").then((response) => {
-      const content = Buffer.from(response.data.content, response.data.encoding).toString("utf-8");
-      const lang = response.data.name.split(".")[1];
-      console.log("lang:", lang, "\n\nrepository file:\n", content);
+  const [solvedTasks, setSolvedTasks] = useState<Number>(0);
+
+  useEffect(() => {
+    get_repository_content("algorithms", "tasks/codeforces/").then((response) => {
+      // const content = Buffer.from(response.data.content, response.data.encoding).toString("utf-8");
+      // const lang = response.data.name.split(".")[1];
+      response.data.forEach((bigDir: any) => {
+        get_repository_content("algorithms", bigDir.path).then((file: any) => {
+          if (bigDir.name == "rounds") {
+            file.data.forEach((dir: any) => {
+              get_repository_content("algorithms", dir.path).then((roundFile: any) => {
+                setSolvedTasks(prev => prev + roundFile.data.length - 1);
+                console.log(roundFile.data.length - 1, solvedTasks);
+              });
+            });
+          } else {
+            setSolvedTasks(prev => prev + file.data.length - 1);
+            console.log(file.data.length - 1, solvedTasks);
+          }
+        });
+      });
     });
-  }, []);*/
+  }, []);
 
   return (
-    <main className={`${mainFont.className} min-h-screen w-4/5 bg-(--bg-sec) overflow-y-auto`}>
+    <main className={`${mainFont.className} h-screen w-4/5 bg-(--bg-sec) overflow-y-scroll pb-10`}>
       <section className="flex gap-4 items-center mt-12 ml-10">
         <div className="flex-1/2 max-w-1/2 flex flex-col">
           <p className="text-3xl"><b>Hello, I'm</b></p>
@@ -49,7 +65,7 @@ export default function HomePage() {
           <p className="text-(--text-sec) text-sm">Projects Completed</p>
         </div>
         <div className="flex flex-col">
-          <p className="text-(--text-main) text-xl">50+</p>
+          <p className="text-(--text-main) text-xl cursor-pointer" title="Only the quantity from algorithms/tasks is taken here" onClick={() => window.open("https://github.com/linoles/algorithms/")}>{solvedTasks + ''}+</p>
           <p className="text-(--text-sec) text-sm">Problems Solved</p>
         </div>
         <div className="flex flex-col">
@@ -114,6 +130,91 @@ export default function HomePage() {
               <img src="/github.png" alt="Github" className="rounded-lg bg-(--bg-sec) border-2 border-(--border) p-1.5" width={35} height={35} />
             </div>
             <p className="text-(--text-sec) font-semibold">Live Demo</p>
+          </div>
+        </div>
+      </section>
+      <section className="mt-12 pt-8 border-t-2 border-(--border) h-max px-10 flex gap-40">
+        <div className="flex flex-col gap-2 max-w-[35%]">
+          <h2 className="text-(--text-main) text-2xl font-bold">About me</h2>
+          <p className="text-(--text-sec) text-sm">
+            I'm beginning developer who loves building modern dynamic web-projects.
+            I enjoy solving complex problems and turning ideas into clear, unique and efficient solutions,
+            but sometimes my solutions may match with the official ones.
+          </p>
+          <div className="flex gap-3 mt-5">
+            <div className="bg-(--bg-violet) rounded-lg p-1 h-fit w-fit">
+              <Focus size={25} color="var(--text-violet)" />
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-(--text-main)">Focused in</h3>
+              <div className="text-(--text-sec) text-sm font-medium">Web Development and now especially Competetive Programming</div>
+            </div>
+          </div>
+          <div className="flex gap-3 mt-3">
+            <div className="bg-(--bg-violet) rounded-lg p-1 h-fit w-fit">
+              <Focus size={25} color="var(--text-violet)" />
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-(--text-main)">Currently learning</h3>
+              <div className="text-(--text-sec) text-sm font-medium">Backend in PHP Laravel 10, algorithms and data structures in C++</div>
+            </div>
+          </div>
+          <div className="btn mt-5 flex gap-4 bg-(--btn-active) w-fit p-2! px-5! hover:brightness-110 hover:scale-105" onClick={() => router.push("/skills")}>
+            <p className="text-white text-sm font-medium">More about Me</p>
+            <MoveRight size={25} color="white" strokeWidth={1.5} />
+          </div>
+        </div>
+        <div className="w-[65%] rounded-lg bg-(--bg-gray) p-4">
+          <div className="bg-(--bg-main) p-3 py-5 relative">
+            {/* Yeah, i wrote it manually :( */}
+            <p className="text-(--text-main)">
+              <span className="font-semibold text-(--text-chosen)">const</span> developer = {"{"}<br />
+              &emsp;&emsp;<span className="font-semibold text-(--text-violet)">name</span>: <span className="text-(--text-green)">"Linoles"</span>,<br />
+              &emsp;&emsp;<span className="font-semibold text-(--text-violet)">skills</span>: {"["}<span className="text-(--text-green)">"JavaScript"</span>, <span className="text-(--text-green)">"TypeScript"</span>, <span className="text-(--text-green)">"Python"</span>, <span className="text-(--text-green)">"C++"</span>, <span className="text-(--text-green)">"PHP"</span>{"]"},<br />
+              &emsp;&emsp;<span className="font-semibold text-(--text-violet)">passion</span>: <span className="text-(--text-green)">"Building useful applications and other things"</span>,<br />
+              &emsp;&emsp;<span className="font-semibold text-(--text-violet)">focus</span>: <span className="text-(--text-green)">"Clean Code & Performance"</span>,<br />
+              {"}"};<br /><br />
+              <span className="font-semibold text-(--text-chosen)">function</span> <span className="text-(--text-orange)">solve</span>(<i>problem</i>) {"{"}<br />
+              &emsp;&emsp;<span className="font-semibold text-(--text-violet)">while</span> (problem.exists) {"{"}<br />
+              &emsp;&emsp;&emsp;&emsp;problem.<span className="text-(--text-orange)">breakdown</span>();<br />
+              &emsp;&emsp;&emsp;&emsp;problem.<span className="text-(--text-orange)">solve</span>();<br />
+              &emsp;&emsp;{"}"}<br />
+              &emsp;&emsp;<span className="font-semibold text-(--text-violet)">return</span> <span className="text-(--text-green)">"Better World 🌍"</span>;<br />
+              {"}"}<br />
+            </p>
+            <div className="rounded-full bg-(--bg-violet) p-3 absolute top-[45%] h-fit w-fit right-8">
+              <Code color="var(--text-violet)" size={30} />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="mt-12 pt-8 border-t-2 border-(--border) h-max px-10">
+        <h2 className="text-(--text-main) text-2xl font-bold">Tech stack</h2>
+        <div className="flex mt-4 gap-1 flex-wrap">
+          {/* Web frontend */}
+          <TechSkill icon="/html.png" title="HTML" />
+          <TechSkill icon="/css.png" title="CSS" />
+          <TechSkill icon="/js.png" title="JavaScript" />
+          <TechSkill icon="/ts.png" title="TypeScript" />
+          <TechSkill icon="/react.png" title="React" />
+          <TechSkill icon="/nextjs.png" title="Next.js" />
+          {/* Backend */}
+          <TechSkill icon="/php.png" title="PHP" />
+          <TechSkill icon="/laravel.png" title="Laravel" />
+          <TechSkill icon="/mysql.png" title="MySQL" />
+          {/* Other */}
+          <TechSkill icon="/python.png" title="Python" />
+          <TechSkill icon="/nodejs.png" title="Node.js" />
+          <TechSkill icon="/git.png" title="Git" />
+        </div>
+        <div className="mt-10 flex justify-between rounded-xl items-center bg-linear-90 from-(--block-gr-from) to-(--block-gr-to) p-10 px-8">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-white font-bold text-2xl">Let's build something amazing together</h2>
+            <p className="text-white">I'm always open to new opportunities and interesting projects</p>
+          </div>
+          <div className="btn h-fit flex gap-4 bg-white w-fit hover:brightness-110 hover:scale-105" onClick={() => router.push("/skills")}>
+            <p className="text-(--block-gr-to) text-sm font-medium">See my Works</p>
+            <MoveRight size={25} color="var(--block-gr-to)" strokeWidth={1.5} />
           </div>
         </div>
       </section>

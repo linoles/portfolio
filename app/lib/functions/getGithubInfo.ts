@@ -1,9 +1,12 @@
+"use server";
+
 import { Octokit } from "octokit";
 
 export async function get_repository(repository: String) {
   const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
   });
+  console.log("Token exists:", !!process.env.GITHUB_TOKEN);
 
   const repo = await octokit.request(`GET /repos/linoles/${repository}`, {
     owner: "linoles",

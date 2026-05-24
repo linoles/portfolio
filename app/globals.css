@@ -4,14 +4,17 @@
   /* Background */
   --bg-main: #fff;
   --bg-sec: #f9fafc;
+  --bg-gray: #ebecf5;
 
   /* Common variables */
   --border: #f1f3f7;
+  --violet-border: #272166;
 
   /* Fonts color */
   --text-main: #232837;
   --text-sec: #898c9a;
   --text-chosen: #837eea;
+  --text-bright: #5a45cc;
 
   /* Buttons */
   --btn-main: #fff;

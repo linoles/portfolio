@@ -28,9 +28,9 @@ export default function RootLayout({
   return (
     <html
       lang="en" // TODO: change here
-      className={`${mainFont.className} h-full antialiased`}
+      className={`${mainFont.className} h-full antialiased overflow-hidden`}
     >
-      <body className="min-h-full flex">
+      <body className="h-full flex overflow-hidden">
         <Navbar curPage="home" />
         {children}
       </body>
