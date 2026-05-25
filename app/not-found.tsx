@@ -1,5 +1,10 @@
+import Navbar from "./lib/components/Navbar";
+
 export default function NotFoundPage() {
   return (
-    <main></main>
+    <>
+      <Navbar curPage="-" />
+      <main></main>
+    </>
   )
 }

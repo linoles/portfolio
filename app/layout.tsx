@@ -31,7 +31,6 @@ export default function RootLayout({
       className={`${mainFont.className} h-full antialiased overflow-hidden`}
     >
       <body className="h-full flex overflow-hidden">
-        <Navbar curPage="home" />
         {children}
       </body>
     </html>

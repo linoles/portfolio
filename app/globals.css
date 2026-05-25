@@ -5,6 +5,7 @@
   --bg-main: #fff;
   --bg-sec: #f9fafc;
   --bg-gray: #ebecf5;
+  --card-bg: white;
 
   /* Common variables */
   --border: #f1f3f7;
@@ -39,6 +40,8 @@
   /* Other */
   --block-gr-from: #5741dd;
   --block-gr-to: #8451da;
+  --progress-bar-bg: #ebecf5;
+  --progress-bar-fill: #875ff0;
 }
 
 /* There some styles that often used in the code,
@@ -96,4 +99,18 @@
   gap: 0.875rem;
   --background: #ffffff;
   --foreground: #171717;
+}
+
+.lang-progress-cont {
+  height: 10px;
+  border-radius: 4px;
+
+  background: var(--progress-bar-bg);
+  position: relative;
+}
+
+.lang-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--progress-bar-fill);
 }

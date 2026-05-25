@@ -29,7 +29,7 @@ export default function Navbar({ curPage }: { curPage: string }) {
         </div>
         <div className={"navbar-link " + (curPage == "exp" ? "active" : "")} onClick={() => router.push("/exp")}>
           <BriefcaseBusiness color={curPage == "exp" ? "var(--btn-active)" : "var(--text-main)"} size={30} />
-          <p>Expirience</p>
+          <p>Experience</p>
         </div>
         <div className={"navbar-link " + (curPage == "about" ? "active" : "")} onClick={() => router.push("/about")}>
           <CircleUserRound color={curPage == "about" ? "var(--btn-active)" : "var(--text-main)"} size={30} />
